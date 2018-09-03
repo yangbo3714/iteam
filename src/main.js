@@ -6,7 +6,9 @@ import router from './router'
 import vueElement from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/index.css'
+import Myhttp from '@/plugins/myhttp'
 
+Vue.use(Myhttp)
 Vue.use(vueElement)
 
 Vue.config.productionTip = false
