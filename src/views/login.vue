@@ -10,7 +10,7 @@
             <el-input v-model="formData.username"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-            <el-input type="password" v-model="formData.password"></el-input>
+            <el-input type="password" @keyup.enter.native="handle" v-model="formData.password"></el-input>
         </el-form-item>
         <el-form-item>
             <el-button class="login-btn" type="primary" @click="handle">登录</el-button>
@@ -34,12 +34,16 @@ export default {
       this.$http
         .post('login', this.formData)
         .then((data) => {
-        //   console.log(data)
+          // console.log(data)
           const { meta: {msg, status} } = data.data
           if (status === 200) {
             // 成功
+            this.$message.success(msg)
+            sessionStorage.setItem('token', data.data.data.token)
+            this.$router.push('/home')
           } else {
             // 失败
+            this.$message.error(msg)
           }
         })
     }
